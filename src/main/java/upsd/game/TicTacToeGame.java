@@ -1,9 +1,5 @@
 package upsd.game;
 
-import upsd.game.winning_positions.WinningDiagonalPositions;
-import upsd.game.winning_positions.WinningHorizontalPositions;
-import upsd.game.winning_positions.WinningVerticalPositions;
-
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -46,8 +42,8 @@ public class TicTacToeGame {
 
     public Summary summary() {
 
-        boolean hasXWon = getWinner(Value.X);
-        boolean hasOWon = getWinner(Value.O);
+        boolean hasXWon = hasWon(Value.X);
+        boolean hasOWon = hasWon(Value.O);
 
         if (!hasXWon && !hasOWon && plays.size() < MAXIMUM_PLAYS) {
             return Summary.PLAYING;
@@ -64,7 +60,7 @@ public class TicTacToeGame {
         return Summary.DRAW;
     }
 
-    private boolean getWinner(Value player) {
+    private boolean hasWon(Value player) {
         return hasWonVertically(player)
                 || hasWonHorizontally(player)
                 || hasWonDiagonally(player);
