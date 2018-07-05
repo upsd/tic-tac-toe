@@ -7,6 +7,10 @@ import upsd.game.winning_positions.WinningVerticalPositions;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import static upsd.game.winning_positions.WinningDiagonalPositions.*;
+import static upsd.game.winning_positions.WinningHorizontalPositions.*;
+import static upsd.game.winning_positions.WinningVerticalPositions.*;
+
 public class TicTacToeGame {
 
     private Value valueToPlace = Value.X;
@@ -67,32 +71,20 @@ public class TicTacToeGame {
     }
 
     private boolean hasWonDiagonally(Value player) {
-        return hasWonDiagonallyWith(WinningDiagonalPositions.fromBottomLeftToTopRight(), player)
-                || hasWonDiagonallyWith(WinningDiagonalPositions.fromTopLeftToBottomRight(), player);
+        return hasWonWith(fromBottomLeftToTopRight(), player)
+                || hasWonWith(fromTopLeftToBottomRight(), player);
     }
 
     private boolean hasWonHorizontally(Value player) {
-        return hasWonHorizontallyWith(WinningHorizontalPositions.forTopRow(), player)
-                || hasWonHorizontallyWith(WinningHorizontalPositions.forMiddleRow(), player)
-                || hasWonHorizontallyWith(WinningHorizontalPositions.forBottomRow(), player);
+        return hasWonWith(forTopRow(), player)
+                || hasWonWith(forMiddleRow(), player)
+                || hasWonWith(forBottomRow(), player);
     }
 
     private boolean hasWonVertically(Value player) {
-        return hasWonVerticallyWith(WinningVerticalPositions.fromTopLeftToBottomLeft(), player)
-                || hasWonVerticallyWith(WinningVerticalPositions.fromTopMiddleToBottomMiddle(), player)
-                || hasWonVerticallyWith(WinningVerticalPositions.fromTopRightToBottomRight(), player);
-    }
-
-    private boolean hasWonDiagonallyWith(List<Position> positionsToSearch, Value playerToSearch) {
-        return hasWonWith(positionsToSearch, playerToSearch);
-    }
-
-    private boolean hasWonHorizontallyWith(List<Position> positionsToSearch, Value playerToSearch) {
-        return hasWonWith(positionsToSearch, playerToSearch);
-    }
-
-    private boolean hasWonVerticallyWith(List<Position> positionsToSearch, Value playerToSearch) {
-        return hasWonWith(positionsToSearch, playerToSearch);
+        return hasWonWith(fromTopLeftToBottomLeft(), player)
+                || hasWonWith(fromTopMiddleToBottomMiddle(), player)
+                || hasWonWith(fromTopRightToBottomRight(), player);
     }
 
     private boolean hasWonWith(List<Position> positionsToSearch, Value playerToSearch) {
